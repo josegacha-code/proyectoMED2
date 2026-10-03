@@ -21,8 +21,8 @@
 			btn_inicio.addEventListener(MouseEvent.CLICK, iniciarContenido);
 		}
 		public function iniciarContenido(e: MouseEvent) {
-			gotoAndStop(5);
 			Aux_pantalla = 1;
+			gotoAndStop(5);
 			mostrarContenido();
 			Multitouch.inputMode = MultitouchInputMode.GESTURE;
 			stage.addEventListener(TransformGestureEvent.GESTURE_SWIPE, deslizarContenido);
@@ -41,7 +41,19 @@
 		public function mostrarContenido() {
 			switch (Aux_pantalla) {
 				case 1:
-					actividad1();
+					actividad1(); //Actividad 1 Drag and Drop
+					break;
+				case 2:
+					actividad2(); //Actividad 2 Drag and Drop
+					break;
+				case 3:
+					//actividad3(); //Actividad 2 Drag and Drop
+					break;
+				case 4:
+					//actividad4(); //Actividad 2 Drag and Drop
+					break;
+				case 5:
+					actividad5(); //Actividad 2 Drag and Drop
 					break;
 			}
 		}
@@ -302,7 +314,6 @@
 					break;
 			}
 		}
-
 		public function CerrarVentana1(e: MouseEvent) {
 			clip_escenario1.visible = false;
 			clip_escenario1.x = 300;
@@ -314,6 +325,148 @@
 		}
 		//**************************************************************************************
 		//FIN DEL BLOQUE ACTIVIDAD 1 DE DRAG AND DROP
+		//**************************************************************************************
+		//**************************************************************************************
+		//INICIO BLOQUE ACTIVIDAD 2 DE DRAG AND DROP
+		//**************************************************************************************
+
+
+		public function actividad2() {
+
+			//Visibilidad clip correcto
+			clip_correcto_antivirus2.visible = false;
+			clip_correcto_hack2.visible = false;
+			clip_correcto_phis2.visible = false;
+
+			//Visibilidad clip incorrecto			
+			clip_error_anti2.visible = false;
+			clip_error_hack2.visible = false;
+			clip_error_phis2.visible = false;
+
+			//Ubicación clip correcto
+			clip_correcto_antivirus2.x = 29;
+			clip_correcto_antivirus2.y = 190;
+
+			clip_correcto_hack2.x = 300;
+			clip_correcto_hack2.y = 189;
+
+			clip_correcto_phis2.x = 561;
+			clip_correcto_phis2.y = 188;
+
+			//Ubicación clip incorrecto			
+			clip_correcto_antivirus2.x = 31;
+			clip_correcto_antivirus2.y = 190;
+
+			clip_correcto_hack2.x = 300;
+			clip_correcto_hack2.y = 189;
+
+			clip_correcto_phis2.x = 561;
+			clip_correcto_phis2.y = 186;
+
+			//AddEventListener en las opciones para drag
+			clip_hacker2.addEventListener(MouseEvent.MOUSE_DOWN, Mover2);
+			clip_antivirus2.addEventListener(MouseEvent.MOUSE_DOWN, Mover2);
+			clip_phishing2.addEventListener(MouseEvent.MOUSE_DOWN, Mover2);
+
+			//AddEventListener en las opciones para drop
+			clip_hacker2.addEventListener(MouseEvent.MOUSE_UP, Soltar2);
+			clip_antivirus2.addEventListener(MouseEvent.MOUSE_UP, Soltar2);
+			clip_phishing2.addEventListener(MouseEvent.MOUSE_UP, Soltar2);
+
+			//AddEventListener botón de verificar
+			btn_verify2.addEventListener(MouseEvent.CLICK, Verificar2);
+
+			//AddEventListener botón reiniciar
+			btn_retry2.addEventListener(MouseEvent.CLICK, Reintentar2);
+		}
+		public function Mover2(e: MouseEvent) {
+			e.target.startDrag();
+		}
+
+		public function Soltar2(e: MouseEvent) {
+			e.target.stopDrag();
+
+			if (e.target.hitTestObject(clip_destinohack2)) {
+				e.target.x = 363;
+				e.target.y = 229;
+			}
+			if (e.target.hitTestObject(clip_destinoanti2)) {
+				e.target.x = 99;
+				e.target.y = 229;
+			}
+			if (e.target.hitTestObject(clip_destinophis2)) {
+				e.target.x = 617;
+				e.target.y = 229;
+			}
+		}
+		public function Verificar2(e: MouseEvent) {
+			if (clip_hacker2.hitTestObject(clip_destinohack2)) {
+				clip_correcto_hack2.visible = true;
+				clip_hacker2.visible = false;
+			} else {
+				clip_error_hack2.visible = true;
+				clip_hacker2.visible = false;
+			}
+			if (clip_antivirus2.hitTestObject(clip_destinoanti2)) {
+				clip_correcto_antivirus2.visible = true;
+				clip_antivirus2.visible = false;
+
+			} else {
+				clip_error_anti2.visible = true;
+				clip_antivirus2.visible = false;
+			}
+			if (clip_phishing2.hitTestObject(clip_destinophis2)) {
+				clip_correcto_phis2.visible = true;
+				clip_phishing2.visible = false;
+			} else {
+				clip_error_phis2.visible = true;
+				clip_phishing2.visible = false;
+			}
+		}
+		public function Reintentar2(e: MouseEvent) {
+			//Visibilidad clip correcto
+			clip_correcto_antivirus2.visible = false;
+			clip_correcto_hack2.visible = false;
+			clip_correcto_phis2.visible = false;
+
+			//Visibilidad clip incorrecto			
+			clip_error_anti2.visible = false;
+			clip_error_hack2.visible = false;
+			clip_error_phis2.visible = false;
+
+			//Visibilidad clips de ejercicio
+			clip_hacker2.visible = true;
+			clip_phishing2.visible = true;
+			clip_antivirus2.visible = true;
+
+			//Reubicación de elementos
+			clip_hacker2.x = 96;
+			clip_hacker2.y = 91;
+
+			clip_antivirus2.x = 366;
+			clip_antivirus2.y = 91;
+
+			clip_phishing2.x = 626;
+			clip_phishing2.y = 91;
+		}
+		//**************************************************************************************
+		//FIN BLOQUE ACTIVIDAD 2 DE DRAG AND DROP
+		//**************************************************************************************
+		//**************************************************************************************
+		//INICIO BLOQUE ACTIVIDAD 1 DE COLISIÓN
+		//**************************************************************************************
+		var inicialx5: Number = 0;
+		var inicialy5: Number = 0;
+		var contador5: Number = 0;
+		var nombre5: String = "";
+		public function actividad5() {
+				clip_retro3.visible=false;
+			clip_retro3.x=85;
+			clip_retro3.y=77;
+			clip_firewall3.addEventListener(MouseEvent.MOUSE_DOWN, Mover5);
+			}
+		//**************************************************************************************
+		//FIN BLOQUE ACTIVIDAD 1 DE COLISIÓN
 		//**************************************************************************************
 	}
 
